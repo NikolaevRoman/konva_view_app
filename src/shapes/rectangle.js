@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Rect, Transformer } from "react-konva";
+import { Rect, Transformer, Line, Circle } from "react-konva";
 
 export default function Rectangle({
   shapeProps,
@@ -17,6 +17,11 @@ export default function Rectangle({
       trRef.current.getLayer().batchDraw();
     }
   }, [isSelected]);
+
+  useEffect(() => {
+    console.log(shapeProps);
+    
+  }, [shapeProps]);
 
   return (
     <React.Fragment>
@@ -49,6 +54,48 @@ export default function Rectangle({
           });
         }}
       />
+      <Line
+        fill={"#FF000010"}
+        stroke={"#ff0000"}
+        hitStrokeWidth={20}
+        x={shapeProps.x}
+        y={shapeProps.y}
+        points={[-3,3,-3,-3,3,-3]}
+        fill="#ff0000"
+        
+      />
+      <Line
+        fill={"#FF000010"}
+        stroke={"#ff0000"}
+        hitStrokeWidth={20}
+        x={shapeProps.x + shapeProps.width}
+        y={shapeProps.y}
+        points={[-3,-3,3,-3,3,3]}
+        fill="#ff0000"
+        
+      />
+      
+      <Line
+        fill={"#FF000010"}
+        stroke={"#ff0000"}
+        hitStrokeWidth={20}
+        x={shapeProps.x}
+        y={shapeProps.y + shapeProps.height}
+        points={[-3,-3,-3,3,3,3]}
+        fill="#ff0000"
+        
+      />
+      <Line
+        fill={"#FF000010"}
+        stroke={"#ff0000"}
+        hitStrokeWidth={20}
+        x={shapeProps.x + shapeProps.width}
+        y={shapeProps.y + shapeProps.height}
+        points={[3,-3,3,3,-3,3]}
+        fill="#ff0000"
+        
+      />
+      
       {isSelected && (
         <Transformer
           ref={trRef}

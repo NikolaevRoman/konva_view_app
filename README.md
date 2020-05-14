@@ -1,3 +1,12 @@
 # konva_view_app
-Little demo app for learning konva library in conjunction with c react.
+Demo app with konva library in conjunction with c react.
 
+## Install
+Clone project to local folder.
+Run - npm install.
+
+## Start
+Use command:
+```node
+npm start 
+```

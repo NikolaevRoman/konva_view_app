@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Stage, Layer, Text, Circle } from "react-konva";
 import Line from "./shapes/Curve";
-import Rect from "./shapes/rectangle";
+import Rect from "./shapes/Rectangle";
 import Image from "./image/Image";
 import ToolButton from "./Buttons/ToolButton";
 import "./styles.css";
@@ -78,27 +78,22 @@ export default function App() {
     if (!drawing) return;
     if (mode === "rect") {
       let lastRect = rects[rects.length - 1];
-      // add point
       lastRect.width = point.x - lastRect.x;
       lastRect.height = point.y - lastRect.y;
       let tempArr = [...rects];
-      // replace last
       tempArr.splice(tempArr.length - 1, 1, lastRect);
       setRects(tempArr);
     } else if (mode === "ellipse") {
       let lastEllipse = ellipses[ellipses.length - 1];
-      // add point
       lastEllipse.width = Math.abs((point.x - lastEllipse.x) * 2);
       lastEllipse.height = Math.abs((point.y - lastEllipse.y) * 2);
       let tempArr = [...ellipses];
-      // replace last
       tempArr.splice(tempArr.length - 1, 1, lastEllipse);
       setEllipses(tempArr);
     } else if (mode === "freeLine") {
       let lastLine = freeLines[freeLines.length - 1];
       lastLine = lastLine.concat([point.x, point.y]);
       let tempArr = [...freeLines];
-      // replace last
       tempArr.splice(tempArr.length - 1, 1, lastLine);
       setFreeLines(tempArr.concat());
     }
