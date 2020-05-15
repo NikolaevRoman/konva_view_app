@@ -20,10 +20,11 @@ export default function CustomLine({
       <Line
         ref={shapeRef}
         fill={"#FF000010"}
-        stroke={isSelected ? "#0000ff" : "#000000"}
+        stroke={isSelected ? "#0000ff" : "#00ff00"}
         strokeWidth={0.5}
         hitStrokeWidth={20}
         lineJoin="round"
+        tension={0.3}
         closed={closed ? true : false}
         {...shapeProps}
         draggable={
@@ -45,6 +46,8 @@ export default function CustomLine({
           shapeRef.current.y(0);
         }}
         onClick={(e) => {
+          console.log(e.target.width);
+
           if (mode === null) selectShape({ id: shapeProps.id, type: type });
         }}
       />

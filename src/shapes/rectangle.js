@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Rect, Transformer, Line, Circle } from "react-konva";
+import React, { useEffect, useRef } from "react";
+import { Rect, Transformer, Line } from "react-konva";
 
 export default function Rectangle({
   shapeProps,
   isSelected,
   onSelect,
   onChange,
-  draggable
+  draggable,
 }) {
   const shapeRef = useRef();
   const trRef = useRef();
@@ -19,8 +19,8 @@ export default function Rectangle({
   }, [isSelected]);
 
   useEffect(() => {
+    console.log("RectComp");
     console.log(shapeProps);
-    
   }, [shapeProps]);
 
   return (
@@ -30,16 +30,20 @@ export default function Rectangle({
         onTap={onSelect}
         ref={shapeRef}
         stroke="#000000"
-        {...shapeProps}
+        // {...shapeProps}
+        x={shapeProps[0]}
+        y={shapeProps[1]}
+        width={shapeProps[2] - shapeProps[0]}
+        height={shapeProps[3] - shapeProps[1]}
         draggable={draggable}
-        onDragEnd={e => {
+        onDragEnd={(e) => {
           onChange({
             ...shapeProps,
             x: e.target.x(),
-            y: e.target.y()
+            y: e.target.y(),
           });
         }}
-        onTransformEnd={e => {
+        onTransformEnd={(e) => {
           const node = shapeRef.current;
           const scaleX = node.scaleX();
           const scaleY = node.scaleY();
@@ -50,52 +54,44 @@ export default function Rectangle({
             x: node.x(),
             y: node.y(),
             width: Math.max(5, node.width() * scaleX),
-            height: Math.max(node.height() * scaleY)
+            height: Math.max(node.height() * scaleY),
           });
         }}
       />
-      <Line
-        fill={"#FF000010"}
+      {/* <Line
         stroke={"#ff0000"}
         hitStrokeWidth={20}
         x={shapeProps.x}
         y={shapeProps.y}
-        points={[-3,3,-3,-3,3,-3]}
+        points={[-3, 3, -3, -3, 3, -3]}
         fill="#ff0000"
-        
       />
       <Line
-        fill={"#FF000010"}
         stroke={"#ff0000"}
         hitStrokeWidth={20}
         x={shapeProps.x + shapeProps.width}
         y={shapeProps.y}
-        points={[-3,-3,3,-3,3,3]}
+        points={[-3, -3, 3, -3, 3, 3]}
         fill="#ff0000"
-        
       />
-      
+
       <Line
-        fill={"#FF000010"}
         stroke={"#ff0000"}
         hitStrokeWidth={20}
         x={shapeProps.x}
         y={shapeProps.y + shapeProps.height}
-        points={[-3,-3,-3,3,3,3]}
+        points={[-3, -3, -3, 3, 3, 3]}
         fill="#ff0000"
-        
       />
       <Line
-        fill={"#FF000010"}
         stroke={"#ff0000"}
         hitStrokeWidth={20}
         x={shapeProps.x + shapeProps.width}
         y={shapeProps.y + shapeProps.height}
-        points={[3,-3,3,3,-3,3]}
+        points={[3, -3, 3, 3, -3, 3]}
         fill="#ff0000"
-        
-      />
-      
+      /> */}
+
       {isSelected && (
         <Transformer
           ref={trRef}

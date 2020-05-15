@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import useImage from "use-image";
 import Konva from "konva";
-import { imageSrc } from "./imageSorce";
 import { Image } from "react-konva";
 
 export default function DicomImage() {

@@ -9,14 +9,14 @@ export default function ToolButton({
   selectShape,
   extended,
   closed,
-  setClosed
+  setClosed,
 }) {
   return (
     <button
       className="tool-button"
       tabIndex="1"
-      onClick={e => {
-        selectShape({ id: null, type: null });
+      onClick={(e) => {
+        //selectShape({ id: null, type: null });
         if (mode === buttonMode) {
           setMode(null);
           setDraggable(true);
@@ -30,7 +30,7 @@ export default function ToolButton({
       {text}
       {extended ? (
         <button
-          onClick={e => {
+          onClick={(e) => {
             e.stopPropagation();
             setClosed(!closed);
           }}
