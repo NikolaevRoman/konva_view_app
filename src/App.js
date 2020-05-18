@@ -77,22 +77,6 @@ export default function App() {
           setDraggable={setDraggable}
           mode={mode}
         />
-        {/* <button
-          tabIndex="1"
-          className="tool-button"
-          onClick={(e) => {
-            setRects([]);
-            setLines([]);
-            setEllipses([]);
-            setTriangles([]);
-            setTexts([]);
-            setFreeLines([]);
-            setAnchorsTriangle([]);
-          }}
-        >
-          Удалить все элементы
-        </button> */}
-
         {mode === null ? null : (
           <div className="text-tooltip"> {`Активный инструмент: ${mode}`}</div>
         )}
@@ -132,13 +116,7 @@ export default function App() {
         <Stage
           width={window.innerWidth}
           height={window.innerHeight}
-          // onContentMousedown={handleMouseDown}
-          // onContentMousemove={handleMouseMove}
-          // onContentMouseup={handleMouseUp}
-          // onClick={handleOnClick}
-          // onDblClick={handleDbClick}
           ref={stageRef}
-          //onMouseDown={checkDeselect}
           draggable={draggable}
           onWheel={handleOnWheel}
         >
