@@ -54,6 +54,20 @@ export default function App() {
           mode={mode}
         />
         <ToolButton
+          buttonMode="segment"
+          text="Линейка"
+          setMode={setMode}
+          setDraggable={setDraggable}
+          mode={mode}
+        />
+        <ToolButton
+          buttonMode="angle"
+          text="Угол"
+          setMode={setMode}
+          setDraggable={setDraggable}
+          mode={mode}
+        />
+        <ToolButton
           buttonMode="freeLine"
           text="Произвольная"
           setMode={setMode}
