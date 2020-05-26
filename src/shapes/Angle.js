@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Line, Circle, Label, Text, Tag } from "react-konva";
 
 export default function CustomLine({
@@ -15,15 +15,37 @@ export default function CustomLine({
 }) {
 	const shapeRef = useRef();
 	const [anchorsVisible, setAnchorsVisible] = useState(true);
+	const [angle, setAngle] = useState();
+	useEffect(() => {
+		if (shapeProps.points.length !== 6) return;
+		let sideA = Math.sqrt(
+			Math.pow(shapeProps.points[2] - shapeProps.points[0], 2) +
+				Math.pow(shapeProps.points[3] - shapeProps.points[1], 2)
+		);
+		let sideB = Math.sqrt(
+			Math.pow(shapeProps.points[4] - shapeProps.points[2], 2) +
+				Math.pow(shapeProps.points[5] - shapeProps.points[3], 2)
+		);
+		let sideC = Math.sqrt(
+			Math.pow(shapeProps.points[0] - shapeProps.points[4], 2) +
+				Math.pow(shapeProps.points[1] - shapeProps.points[5], 2)
+		);
+		let cosC =
+			(Math.pow(sideA, 2) + Math.pow(sideB, 2) - Math.pow(sideC, 2)) /
+			(2 * sideA * sideB);
+		let angle = Math.acos(cosC) * (180 / Math.PI);
+		setAngle(Math.trunc(angle));
+	});
 	return (
 		<React.Fragment>
 			<Line
 				ref={shapeRef}
 				fill={"#FF0000"}
 				stroke={isSelected ? "#00ffff" : "#f3f613"}
-				strokeWidth={2}
+				strokeWidth={0.5}
 				hitStrokeWidth={20}
 				lineJoin="round"
+				strokeWidth={2}
 				closed={closed ? true : false}
 				{...shapeProps}
 				draggable={
@@ -50,10 +72,10 @@ export default function CustomLine({
 					if (mode === null) selectShape({ id: shapeProps.id, type: type });
 				}}
 			/>
-			{anchorsVisible ? (
+			{anchorsVisible && shapeProps.points.length === 6 ? (
 				<Label
-					x={shapeProps.points[0] + 5}
-					y={shapeProps.points[1] + 5}
+					x={shapeProps.points[2] + 5}
+					y={shapeProps.points[3] + 5}
 					draggable={draggable}
 				>
 					<Tag
@@ -62,14 +84,9 @@ export default function CustomLine({
 						fill={isSelected ? "#00ffff" : "#f3f613"}
 					/>
 					<Text
-						x={0}
-						y={0}
-						text={`${Math.trunc(
-							Math.sqrt(
-								Math.pow(shapeRef.current?.width(), 2) +
-									Math.pow(shapeRef.current?.height(), 2)
-							)
-						)}px`}
+						text={angle ? `${angle}\u00B0` : null}
+						width={30}
+						height={20}
 						align="center"
 						verticalAlign="middle"
 					></Text>
@@ -88,9 +105,12 @@ export default function CustomLine({
 									id={`anchor_${shapeProps.id}_${i}`}
 									x={item?.x}
 									y={item?.y}
+									// fill={isSelected ? "#0000ff30" : "#ff0000"}
 									fill={"#ff0000"}
 									radius={3.5}
 									hitStrokeWidth={10}
+									//strokeWidth={1}
+									//stroke={isSelected ? "#0000ff" : "#000000"}
 									draggable={
 										selectedShape.id === shapeProps.id &&
 										selectedShape.type === type
