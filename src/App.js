@@ -54,6 +54,13 @@ export default function App() {
           mode={mode}
         />
         <ToolButton
+          buttonMode="magnifier"
+          text="Лупа"
+          setMode={setMode}
+          setDraggable={setDraggable}
+          mode={mode}
+        />
+        <ToolButton
           buttonMode="segment"
           text="Линейка"
           setMode={setMode}
@@ -73,20 +80,10 @@ export default function App() {
           setMode={setMode}
           setDraggable={setDraggable}
           mode={mode}
-          // extended={true}
-          // closed={closed}
-          // setClosed={setClosed}
         />
         <ToolButton
           buttonMode="text"
           text="Текст"
-          setMode={setMode}
-          setDraggable={setDraggable}
-          mode={mode}
-        />
-        <ToolButton
-          buttonMode="segment"
-          text="Линейка"
           setMode={setMode}
           setDraggable={setDraggable}
           mode={mode}

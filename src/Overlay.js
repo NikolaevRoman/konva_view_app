@@ -85,6 +85,7 @@ export default function Overlay({
           console.log("segment start");
           if (drawingSegment) {
             setDrawingSegment(false);
+            setMode(null);
             return;
           }
           setSegment([...segment, [point.x, point.y]]);
@@ -269,6 +270,12 @@ export default function Overlay({
     selectShape({ id: null, type: null });
     setTextInputProps({ visible: false });
     setNewLineFlag(true);
+    if (mode === "magnifier") {
+      let stage = stageRef.current.getStage();
+      let clip = stage.clip({ x: 20, y: 20, width: 100, height: 100 });
+      console.log("clip");
+      console.log(clip);
+    }
   }, [mode]);
 
   useEffect(() => {
